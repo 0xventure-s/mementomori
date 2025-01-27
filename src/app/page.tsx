@@ -1,7 +1,17 @@
-import MementoMoriForm from "@/components/MementoMori.tsx/memento-mori-form";
-import { TypingAnimation } from "@/components/ui/typing-animation";
-import Image from "next/image";
-import Link from "next/link";
+
+"use client"
+import dynamic from 'next/dynamic'
+import { TypingAnimation } from "@/components/ui/typing-animation"
+import Image from "next/image"
+import Link from "next/link"
+
+const MementoMoriForm = dynamic(
+  () => import('@/components/MementoMori.tsx/memento-mori-form'),
+  { 
+    ssr: false,
+    loading: () => <div className="h-96 animate-pulse bg-zinc-900/50 rounded-xl" />
+  }
+)
 
 export default function Home() {
   return (
@@ -23,18 +33,18 @@ export default function Home() {
         </TypingAnimation>
       </div>
 
-      <main className="  max-w-6xl mx-auto h-fit">
+      <main className="max-w-6xl mx-auto h-fit">
         <div>
           <MementoMoriForm />
         </div>
+        
         <div className="flex justify-center items-center">
           <p className="text-sm text-gray-500">Creado por:&nbsp; </p>
           <Link href={"https://x.com/0x_from"} className="hover:underline">
-            
             Pantera 0x
           </Link>
         </div>
       </main>
     </>
-  );
+  )
 }
